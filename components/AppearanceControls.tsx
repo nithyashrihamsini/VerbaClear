@@ -21,11 +21,11 @@ export default function AppearanceControls({
   focusLine: boolean;
   setFocusLine: (v: boolean) => void;
 }) {
-  const themes: { id: Theme; label: string; swatch: string }[] = [
-    { id: "default", label: "Default", swatch: "#ffffff" },
-    { id: "cream", label: "Cream", swatch: "#fbf3db" },
-    { id: "dark", label: "Dark", swatch: "#121212" },
-    { id: "bluetint", label: "Blue tint", swatch: "#eaf1f8" },
+  const themes: { id: Theme; label: string; bg: string; fg: string }[] = [
+    { id: "default", label: "Default", bg: "#ffffff", fg: "#111111" },
+    { id: "cream", label: "Cream", bg: "#fbf3db", fg: "#3a3226" },
+    { id: "dark", label: "Dark", bg: "#121212", fg: "#ededed" },
+    { id: "bluetint", label: "Blue tint", bg: "#eaf1f8", fg: "#1f2933" },
   ];
 
   return (
@@ -37,11 +37,13 @@ export default function AppearanceControls({
             key={t.id}
             onClick={() => setTheme(t.id)}
             title={t.label}
-            className={`h-7 w-7 rounded-full border-2 ${
-              theme === t.id ? "border-indigo-600" : "border-black/20"
+            className={`btn-pop flex h-9 w-9 items-center justify-center rounded-full border-2 text-xs font-bold ${
+              theme === t.id ? "border-indigo-600 ring-2 ring-indigo-300" : "border-black/20"
             }`}
-            style={{ backgroundColor: t.swatch }}
-          />
+            style={{ backgroundColor: t.bg, color: t.fg }}
+          >
+            Aa
+          </button>
         ))}
       </div>
 
@@ -76,7 +78,7 @@ function ToggleChip({
   return (
     <button
       onClick={onClick}
-      className={`rounded-full px-3 py-1.5 text-sm font-medium transition ${
+      className={`btn-pop rounded-full px-3 py-1.5 text-sm font-medium ${
         active
           ? "bg-indigo-600 text-white"
           : "bg-white/70 text-black/70 border border-black/20"

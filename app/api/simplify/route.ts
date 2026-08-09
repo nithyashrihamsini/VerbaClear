@@ -24,6 +24,10 @@ export async function POST(req: NextRequest) {
       config: {
         responseMimeType: "application/json",
         maxOutputTokens: 8192,
+        thinkingConfig: {
+      thinkingBudget: 0,
+    },
+
       },
     });
 

@@ -1,0 +1,71 @@
+@import url("https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/open-dyslexic-regular.css");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --reading-line-color: rgba(255, 214, 10, 0.25);
+}
+
+body {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Theme presets */
+.theme-default {
+  background-color: #ffffff;
+  color: #111111;
+}
+
+.theme-cream {
+  background-color: #fbf3db;
+  color: #3a3226;
+}
+
+.theme-dark {
+  background-color: #121212;
+  color: #ededed;
+}
+
+.theme-bluetint {
+  background-color: #eaf1f8;
+  color: #1f2933;
+}
+
+.font-opendyslexic {
+  font-family: "OpenDyslexic", sans-serif !important;
+}
+
+/* Bionic reading bold segment */
+.bionic-bold {
+  font-weight: 700;
+}
+
+/* Focus line / reading guide */
+.focus-line {
+  position: relative;
+}
+
+.focus-line::before {
+  content: "";
+  position: absolute;
+  left: -8px;
+  right: -8px;
+  top: var(--focus-top, 0px);
+  height: 1.6em;
+  background: var(--reading-line-color);
+  border-radius: 4px;
+  pointer-events: none;
+  transition: top 0.08s linear;
+  z-index: 0;
+}
+
+.focus-line > * {
+  position: relative;
+  z-index: 1;
+}
+
+.reading-paragraph {
+  scroll-margin-top: 100px;
+}

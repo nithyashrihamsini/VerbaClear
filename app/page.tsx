@@ -7,6 +7,7 @@ import AppearanceControls, { Theme } from "@/components/AppearanceControls";
 import LevelSlider, { Level } from "@/components/LevelSlider";
 import JargonDecoder from "@/components/JargonDecoder";
 import ChunkedView from "@/components/ChunkedView";
+import ReadingText from "@/components/ReadingText";
 
 type SimplifyResult = {
   title: string;

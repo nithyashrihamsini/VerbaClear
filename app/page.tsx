@@ -68,6 +68,21 @@ export default function Home() {
     }
     handleSimplify(inputText);
   };
+  const handleTrySamplePdf = async () => {
+  setLoading(true);
+  setError(null);
+  try {
+    const res = await fetch("/sample-medical-form.pdf");
+    const blob = await res.blob();
+    const file = new File([blob], "sample-medical-form.pdf", {
+      type: "application/pdf",
+    });
+    await handleFileUpload(file);
+  } catch (err: any) {
+    setError("Could not load the sample PDF.");
+    setLoading(false);
+  }
+};
 
   const handleFileUpload = async (file: File) => {
     setLoading(true);
@@ -120,7 +135,7 @@ export default function Home() {
       <div className="mx-auto max-w-4xl px-4 py-10">
         <header className="mb-8 text-center">
           <h1 className="text-3xl font-bold sm:text-4xl">
-            ClearRead <span className="text-indigo-600">✦</span>
+            VerbaClear <span className="text-indigo-600">✦</span>
           </h1>
           <p className="mt-2 opacity-70">
             Paste any dense text or upload a PDF. Get an instantly accessible,
@@ -162,6 +177,14 @@ export default function Home() {
                   if (f) handleFileUpload(f);
                 }}
               />
+              <span className="opacity-50">or</span>
+<button
+  onClick={handleTrySamplePdf}
+  disabled={loading}
+  className="rounded-lg border border-indigo-300 bg-indigo-50 px-5 py-2.5 font-medium text-indigo-700 hover:bg-indigo-100 disabled:opacity-50"
+>
+  🎬 Try sample PDF
+</button>
             </div>
             {error && <p className="text-sm text-red-600">{error}</p>}
           </div>

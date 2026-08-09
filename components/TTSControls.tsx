@@ -24,6 +24,7 @@ export default function TTSControls({
     window.speechSynthesis.cancel();
     setSpeaking(false);
     setPaused(false);
+    if (onBoundary) onBoundary(-1);
   };
 
   const handlePlay = () => {
@@ -46,6 +47,7 @@ export default function TTSControls({
     utterance.onend = () => {
       setSpeaking(false);
       setPaused(false);
+       if (onBoundary) onBoundary(-1);
     };
     utterance.onboundary = (e) => {
       if (onBoundary && e.charIndex !== undefined) {

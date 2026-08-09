@@ -23,6 +23,7 @@ export async function POST(req: NextRequest) {
       contents: buildSimplifyPrompt(trimmed),
       config: {
         responseMimeType: "application/json",
+        maxOutputTokens: 8192,
       },
     });
 

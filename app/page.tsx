@@ -9,6 +9,12 @@ import JargonDecoder from "@/components/JargonDecoder";
 import ChunkedView from "@/components/ChunkedView";
 import ReadingText from "@/components/ReadingText";
 
+const SAMPLE_TEXT = `Patient Informed Consent & Statutory Disclosure Notice
+
+Pursuant to Section 12(a) of the Healthcare Compliance Directive, the undersigned patient or designated legal proxy hereby acknowledges receipt of the clinical prognosis and associated pharmacological risks. Notwithstanding prior verbal communications, the therapeutic intervention may induce transient adverse events including, but not limited to, somnolence, vertigo, or mild gastrointestinal distress.
+
+By executing this document, the patient indemnifies the facility against non-negligent clinical outcomes, confirming that all prophylactic measures and post-procedural contraindications have been reviewed in full prior to administration.`;
+
 type SimplifyResult = {
   title: string;
   levels: Record<Level, string>;
@@ -68,20 +74,9 @@ export default function Home() {
     }
     handleSimplify(inputText);
   };
-  const handleTrySamplePdf = async () => {
-  setLoading(true);
-  setError(null);
-  try {
-    const res = await fetch("/sample-medical-form.pdf");
-    const blob = await res.blob();
-    const file = new File([blob], "sample-medical-form.pdf", {
-      type: "application/pdf",
-    });
-    await handleFileUpload(file);
-  } catch (err: any) {
-    setError("Could not load the sample PDF.");
-    setLoading(false);
-  }
+  const handleTrySample = () => {
+  setInputText(SAMPLE_TEXT);
+  handleSimplify(SAMPLE_TEXT);
 };
 
   const handleFileUpload = async (file: File) => {
@@ -179,11 +174,11 @@ export default function Home() {
               />
               <span className="opacity-50">or</span>
 <button
-  onClick={handleTrySamplePdf}
+  onClick={handleTrySample}
   disabled={loading}
   className="rounded-lg border border-indigo-300 bg-indigo-50 px-5 py-2.5 font-medium text-indigo-700 hover:bg-indigo-100 disabled:opacity-50"
 >
-  🎬 Try sample PDF
+  🎬 Try a sample document
 </button>
             </div>
             {error && <p className="text-sm text-red-600">{error}</p>}
